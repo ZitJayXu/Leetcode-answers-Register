@@ -1,0 +1,27 @@
+01 //给你一个 m * n 的矩阵 grid，矩阵中的元素无论是按行还是按列，都以非递增顺序排列。 请你统计并返回 grid 中 负数 的数目。
+class Solution {
+public:
+    int countNegatives(vector<vector<int>>& grid) {
+    int count=0,m=grid.size(),mid;
+     for(auto ch:grid)
+     {
+         int L=0,R=ch.size()-1;
+         if(ch[0]<0){
+             count+=ch.size();
+         }
+         else{
+              while(L<R) {
+                    mid=(L+R)>>1;
+                    if(ch[mid]>=0){
+                         L=mid+1;
+                    }
+                     else{
+                        R=mid;
+                    }
+                }
+                count+=ch[L]>=0?ch.size()-1-L:ch.size()-L;
+            }    
+         }
+       return count;
+    }
+};
